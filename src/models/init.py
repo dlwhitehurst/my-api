@@ -32,39 +32,35 @@ def initialize(http, db):
           else:
             print(e.msg)
 
-    # Initial user
-    db.create('users', {
+    # Initial Person
+    db.create('persons', {
       "id": 1,
-      "firstName": "Bob",
-      "lastName": "Frederick",
-      "dateofbirth": "06/21/1980",
+      "firstname": "Tom",
+      "lastname": "Smith",
+      "dateofbirth": "06/01/2020",
       "gender": "M",
-      "title": "Manager",
+      "title": "Friend",
+      "phonemobile": "123-456-7890",
+      "phonehome": "919-456-1000",
+      "phonework": "800-784-7890",
+      "emailhome": "tsmith@gmail.com",
+      "emailwork": "tsmith@acme.com",
       "auth": json.dumps({
         "key": "secret",
         "token": token
       })
     })
 
-    # Initial contact
-    db.create('contacts', {
-      "user": 1,
-      "type": "email",
-      "value": "bfe@sample.com",
-      "preferred" : True
-    })
-
     # Initial address
     db.create('addresses', {
       "user": 1,
-      "type": "home",
-      "number": 1234,
-      "street": "blah blah St",
-      "unit": "1 a",
-      "city": "Somewhere",
-      "state": "WV",
-      "zipcode": "12345"
+      "address1": "2932 Tram Road",
+      "address2": "",
+      "city": "Fuquay Varina",
+      "state": "NC",
+      "zipcode": "27526"
     })
+
   except mysql.connector.Error:
     pass
 

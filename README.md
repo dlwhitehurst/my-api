@@ -1,6 +1,6 @@
 # Python RESTful API
 
-Python-Flask RESTful API and MySQL
+Python-Flask RESTful API with MySQL
 
 
 ### Run docker with separate container
@@ -71,13 +71,22 @@ networks:
 
 ##### Run docker-compose containers
 ```
-$ docker-composer up
+$ docker-compose up
 ```
 ### API Endpoints
 
-##### Init
+##### Initialization
 Initialize database and request token
 - GET /api/v1/init
+
+NOTE: Token should be present in console output if running Docker compose as above (not -d daemon)
+
+##### Timecards
+- POST /api/v1/timecards
+- GET /api/v1/timecards
+- GET /api/v1/timecards/{date}
+- PUT /api/v1/timecards/{date}
+- DELETE /api/v1/timecards/{date}
 
 ##### Users
 - POST /api/v1/users
@@ -99,7 +108,6 @@ Initialize database and request token
 - GET /api/v1/users/{user_id}/contacts/{contact_id}
 - PUT /api/v1/users/{user_id}/contacts/{contact_id}
 - DELETE /api/v1/users/{user_id}/contacts/{contact_id}
-
 
 ### Authorization
 HTTP header request should have authorization field with token

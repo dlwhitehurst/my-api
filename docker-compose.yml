@@ -1,23 +1,22 @@
 version: '3.7'
 
 services:
-  mysql:
-    image: mysql:latest
-    restart: always
-    container_name: mysql
-    ports:
-      - 3306:3306
-    networks:
-      - api
+  myapi_db:
+    image: linuxserver/mariadb
+    container_name: myapi_db
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_HOST: '%'
-      MYSQL_PASSWORD: demo
-      MYSQL_DATABASE: demo
-      MYSQL_ROOT_PASSWORD: demo
-    command: --default-authentication-plugin=mysql_native_password
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=<yourdbpass>
+      - TZ=Europe/London
+      - MYSQL_DATABASE=demo
+      - MYSQL_USER=demo
+      - MYSQL_PASSWORD=demo
+    volumes:
+      - /Users/ciwise/Data/my-api/maria:/config
+    restart: unless-stopped
   api:
-    image: rmindo/python-api
+    image: dlwhitehurst/my-api
     restart: always
     container_name: api
     ports:
@@ -27,7 +26,7 @@ services:
     networks:
       - api
     links:
-      - mysql
+      - myapi_db 
     environment:
       DB_HOST: mysql
       DB_USER: root

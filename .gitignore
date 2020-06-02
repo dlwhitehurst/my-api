@@ -5,3 +5,6 @@ env
 data
 # Cache
 __pycache__
+
+# PyChar
+.idea/

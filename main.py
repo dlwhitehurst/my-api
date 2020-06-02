@@ -16,6 +16,8 @@ from src.versions.v1.api import API1
 # Models
 from src.models.database import Database
 
+# Swagger implementation
+from flask_swagger_ui import get_swaggerui_blueprint
 
 api = {}
 
@@ -41,7 +43,19 @@ api['v1'] = API1(database)
 #
 http.api(api)
 
+### swagger specific ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Seans-Python-Flask-REST-Boilerplate"
+    }
+)
 
+http.flask.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+### end swagger specific ###
 
 # Handle not found error
 @http.flask.errorhandler(404)

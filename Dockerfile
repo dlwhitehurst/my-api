@@ -1,12 +1,11 @@
 # Base image
 FROM python:3.8.2-alpine3.11
 
-# Add a token argument
+# Add token arguments
 ARG DB_HOST
 ARG DB_USER
 ARG DB_NAME
 ARG DB_PASSWORD
-
 
 # Working directory
 WORKDIR /www/api
@@ -34,10 +33,8 @@ ENV DB_USER=${DB_USER}
 ENV DB_NAME=${DB_NAME}
 ENV DB_PASSWORD=${DB_PASSWORD}
 
-
-# Export port 80
+# Export port 80 for container access
 EXPOSE 80
-
 
 # Run
 CMD ["python3","main.py"]

@@ -1,12 +1,17 @@
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `persons` (
   `id`        	   INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `firstname`		   VARCHAR(50) DEFAULT NULL,
   `lastname`		   VARCHAR(50) DEFAULT NULL,
   `title`	         VARCHAR(50) DEFAULT NULL,
   `gender`	       VARCHAR(1)  DEFAULT NULL,
   `dateofbirth`	   VARCHAR(10) DEFAULT NULL,
+  `phonemobile`   VARCHAR(20) DEFAULT NULL,
+  `phonehome`   VARCHAR(20) DEFAULT NULL,
+  `phonework`   VARCHAR(20) DEFAULT NULL,
+  `emailhome`   VARCHAR(80) DEFAULT NULL,
+  `emailwork`   VARCHAR(80) DEFAULT NULL,
   `auth`	         JSON  DEFAULT NULL,
   `datecreated` 	 TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `datemodified`   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `users` (`id`)
+  INDEX `persons` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

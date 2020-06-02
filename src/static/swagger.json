@@ -1,0 +1,275 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This Swagger REST API specification is only a template for the quick-start of a simple REST mock service for other API implementation and development. This API is hosted using Docker and Python Flask.",
+    "version": "1.0.0",
+    "title": "My-API Python3-Flask-REST-Template",
+    "contact": {
+      "email": "dlwhitehurst@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "/api/v1/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Person",
+      "description": "Example API for Person Objects"
+    }
+  ],
+  "paths": {
+    "/persons": {
+      "get": {
+        "tags": [
+          "Persons"
+        ],
+        "summary": "Returns Persons",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/persons"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Create a new Person",
+        "requestBody": {
+          "description": "Person Post Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/person"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/persons/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "uri parameter and id for the person object",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Person"
+        ],
+        "summary": "Get person with given id",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Person id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/person"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "summary": "edit a person by id",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Person id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Person Object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/person"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/person"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Person by id",
+        "tags": [
+          "Person"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Person id",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "$ref": "#/components/schemas/id"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "personPostBody": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "format": "string"
+          },
+          "lastname": {
+            "type": "string",
+            "format": "string"
+          },
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "gender": {
+            "type": "string",
+            "format": "string"
+          },
+          "dateofbirth": {
+            "type": "string",
+            "format": "string"
+          },
+          "phonemobile": {
+            "type": "string",
+            "format": "email"
+          },
+          "phonehome": {
+            "type": "string",
+            "format": "email"
+          },
+          "phonework": {
+            "type": "string",
+            "format": "email"
+          },
+          "emailhome": {
+            "type": "string",
+            "format": "email"
+          },
+          "emailwork": {
+            "type": "string",
+            "format": "email"
+          }
+
+        }
+      },
+      "person": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "number"
+          }
+        }
+      },
+      "persons": {
+        "type": "object",
+        "properties": {
+          "bookRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/person"
+            }
+          }
+        }
+      }
+    }
+  }
+}
